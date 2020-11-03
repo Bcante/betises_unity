@@ -85,7 +85,6 @@ public class Grid {
     public void SetValue(int x, int y, int value) {
         if (x >= 0 && y >= 0 && x < width && y < height) {
             gridArray[x, y] = Mathf.Clamp(value, HEAT_MAP_MIN_VALUE, HEAT_MAP_MAX_VALUE);
-            Debug.Log("(" + x + "-" + y + "):" + gridArray[x, y]);
             //if (OnGridValueChanged != null) OnGridValueChanged(this, new OnGridValueChangedEventArgs { x = x, y = y });
         }
     }
