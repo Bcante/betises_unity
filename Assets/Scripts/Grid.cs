@@ -19,7 +19,7 @@ using CodeMonkey.Utils;
 public class Grid {
 
     public const int HEAT_MAP_MAX_VALUE = 100;
-    public const int HEAT_MAP_MIN_VALUE = 0;
+    public const int HEAT_MAP_MIN_VALUE = 0; // Felix is a baby 
 
     //public event EventHandler<OnGridValueChangedEventArgs> OnGridValueChanged;
     //public class OnGridValueChangedEventArgs : EventArgs {
