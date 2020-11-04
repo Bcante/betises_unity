@@ -10,7 +10,7 @@ public class Testing : MonoBehaviour {
     private Grid grid;
 
     private void Start() {
-        grid = new Grid(10, 10, 10f, Vector3.zero);  
+        grid = new Grid(35, 20, 5f, Vector3.zero);  
         heatMapVisual.SetGrid(grid);
     }   
 
@@ -19,7 +19,7 @@ public class Testing : MonoBehaviour {
         {
             Vector3 position = UtilsClass.GetMouseWorldPosition();
             int value = grid.GetValue(position);
-            grid.AddValue(position, Grid.HEAT_MAP_INCREMENT , Grid.HEAT_MAP_CLICK_RANGE); 
+            grid.AddValue(position, 100,2,10); 
         }
     }
 }

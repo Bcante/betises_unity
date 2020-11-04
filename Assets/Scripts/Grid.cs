@@ -48,7 +48,7 @@ public class Grid {
 
         gridArray = new int[width, height];
 
-        bool showDebug = true;
+        bool showDebug = false;
         if (showDebug) {
             TextMesh[,] debugTextArray = new TextMesh[width, height];
 
@@ -133,19 +133,40 @@ public class Grid {
         }
     }
 
-    public void AddValue(Vector3 worldPosition, int value, int range) {
+    public void AddValue(Vector3 worldPosition, int value, int fullValueRange, int totalRange ) {
+
+        int lowerValueAmount = Mathf.RoundToInt((float) value / (totalRange - fullValueRange));
+
         GetXY(worldPosition, out int originX, out int originY);
         if (clickInRange(originX, originY)) {
-            for (int i = 0; i < range; i++)
+            for (int i = 0; i < totalRange; i++)
                 {
-                    for (int j = 0; j < range - i; j++)
+                for (int j = 0; j < totalRange - i; j++)
                     {
-                        AddValue(originX + i, originY + j, value); // triangle haut droite
-                        AddValue(originX - i, originY + j, value); // triangle haut gauche
-                        AddValue(originX + i, originY - j, value); // triangle bas droite
-                        AddValue(originX - i, originY - j, value); // triangle bas gauche
+                        int radius = i + j;
+                        int addValueAmount = value;
+                        if (radius > fullValueRange)
+                        {
+                            addValueAmount -= lowerValueAmount * ( radius - fullValueRange);
+                        }
+                             
+                        AddValue(originX + i, originY + j, addValueAmount); // triangle haut droite
+                        if (i > 0)
+                        {
+                            AddValue(originX - i, originY + j, addValueAmount); // triangle haut gauche
+                        }
+
+                    if (j > 0)
+                    {
+                        AddValue(originX + i, originY - j, addValueAmount); // triangle bas droite
+                        if (i > 0)
+                        {
+                            AddValue(originX - i, originY - j, addValueAmount); // triangle bas gauche
+                        }
+                    } 
+                    
                 }
-                }
+             }
         }
         
 
