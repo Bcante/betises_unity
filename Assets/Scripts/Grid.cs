@@ -138,10 +138,12 @@ public class Grid {
         if (clickInRange(originX, originY)) {
             for (int i = 0; i < range; i++)
                 {
-                    for (int j = 0; j < range; j++)
+                    for (int j = 0; j < range - i; j++)
                     {
-                        AddValue(originX + i, originY + j, value); //
-                        AddValue(originX - i, originY - j, value);
+                        AddValue(originX + i, originY + j, value); // triangle haut droite
+                        AddValue(originX - i, originY + j, value); // triangle haut gauche
+                        AddValue(originX + i, originY - j, value); // triangle bas droite
+                        AddValue(originX - i, originY - j, value); // triangle bas gauche
                 }
                 }
         }

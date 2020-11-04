@@ -10,7 +10,7 @@ public class Testing : MonoBehaviour {
     private Grid grid;
 
     private void Start() {
-        grid = new Grid(6, 6, 10f, Vector3.zero);  
+        grid = new Grid(10, 10, 10f, Vector3.zero);  
         heatMapVisual.SetGrid(grid);
     }   
 
