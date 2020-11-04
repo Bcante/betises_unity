@@ -1,12 +1,14 @@
 ﻿
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class HeatMapVisual : MonoBehaviour
 {
     private Grid grid;
     private Mesh mesh;
+    private bool updateMesh;
 
     public void Awake()
     {
@@ -22,9 +24,21 @@ public class HeatMapVisual : MonoBehaviour
         grid.OnGridValueChanged += Grid_OnGridValueChanged; // Subscribe à l'evenement 
     }
 
+    // Pour des raisons de performance on va mettre en buffer les update avant de les déclencher
     private void Grid_OnGridValueChanged(object sender, Grid.OnGridValueChangedEventArgs e)
     {
-        UpdateHeatMapVisual();
+        //UpdateHeatMapVisual();
+        updateMesh = true;
+    }
+
+    // fonction système donc pas besoin de l'appeler de manière externe. Elle le sera à la fin de chaque frame, et pas x fois par frame
+    private void LateUpdate()
+    {
+        if (updateMesh)
+        {
+            updateMesh = false;
+            UpdateHeatMapVisual();
+        }
     }
 
     private void UpdateHeatMapVisual()

@@ -133,7 +133,9 @@ public class Grid {
         }
     }
 
+    // Chaqun de ces add values va déclencher l'évènement, donc théoriquement pour un clic on va avoir i*j*4 appels à notre truc d'update alors qu'on veut juste un résult par frame
     public void AddValue(Vector3 worldPosition, int value, int fullValueRange, int totalRange ) {
+        UnityEngine.Profiling.Profiler.BeginSample("My Sample");
 
         int lowerValueAmount = Mathf.RoundToInt((float) value / (totalRange - fullValueRange));
 
@@ -167,6 +169,7 @@ public class Grid {
                     
                 }
              }
+            UnityEngine.Profiling.Profiler.EndSample();
         }
         
 

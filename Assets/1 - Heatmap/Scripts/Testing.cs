@@ -15,6 +15,7 @@ public class Testing : MonoBehaviour {
     }   
 
     private void Update() {
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 position = UtilsClass.GetMouseWorldPosition();
