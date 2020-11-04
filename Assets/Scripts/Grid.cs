@@ -140,8 +140,9 @@ public class Grid {
                 {
                     for (int j = 0; j < range; j++)
                     {
-                        AddValue(originX + i, originY + j, value);
-                    }
+                        AddValue(originX + i, originY + j, value); //
+                        AddValue(originX - i, originY - j, value);
+                }
                 }
         }
         
