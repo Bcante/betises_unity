@@ -16,7 +16,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 
-namespace old { 
 public class Grid {
 
     public const int HEAT_MAP_MAX_VALUE = 100;
@@ -201,5 +200,4 @@ public class Grid {
         //}
     }
 
-}
 }
