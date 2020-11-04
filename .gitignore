@@ -65,3 +65,37 @@ crashlytics-build.properties
 #MISC
 ProjectSettings/*
 */CodeMonkey/*
+Assets/Scenes/SampleScene.unity
+Assets/Textures/Black_Red_Yellow_Green.png
+Assets/Textures/New Material.mat
+HeatMap.exe
+HeatMap_Data/app.info
+HeatMap_Data/boot.config
+HeatMap_Data/globalgamemanagers
+HeatMap_Data/globalgamemanagers.assets
+HeatMap_Data/level0
+HeatMap_Data/resources.assets
+HeatMap_Data/resources.assets.resS
+HeatMap_Data/Resources/unity default resources
+HeatMap_Data/Resources/unity_builtin_extra
+HeatMap_Data/sharedassets0.assets
+MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser
+MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx
+MonoBleedingEdge/etc/mono/2.0/machine.config
+MonoBleedingEdge/etc/mono/2.0/settings.map
+MonoBleedingEdge/etc/mono/2.0/web.config
+MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser
+MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx
+MonoBleedingEdge/etc/mono/4.0/machine.config
+MonoBleedingEdge/etc/mono/4.0/settings.map
+MonoBleedingEdge/etc/mono/4.0/web.config
+MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser
+MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx
+MonoBleedingEdge/etc/mono/4.5/machine.config
+MonoBleedingEdge/etc/mono/4.5/settings.map
+MonoBleedingEdge/etc/mono/4.5/web.config
+MonoBleedingEdge/etc/mono/browscap.ini
+MonoBleedingEdge/etc/mono/config
+MonoBleedingEdge/etc/mono/mconfig/config.xml
+Packages/manifest.json
+UnityCrashHandler32.exe
