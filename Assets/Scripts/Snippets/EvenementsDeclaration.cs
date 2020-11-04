@@ -3,26 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Evenements
+
+public class EvenementsDeclaration
 
 {
     // Event Handler
-    public event EventHandler<OnGridValueChangedEventArgs> OnGridValueChanged;
+    public event EventHandler<OnUpdateArgs> OnUpdate;
 
     // Local class definition
-    public class OnGridValueChangedEventArgs : EventArgs
+    public class OnUpdateArgs : EventArgs
     {
         public int x;
         public int y;
     }
 
-    public Evenements()
+    public EvenementsDeclaration()
     {
         /*
          * Dans notre exemple le sender est la grille
          * Et eventArgs défini plus haut peut prendre les valurs qu'on veut
          * */
-        OnGridValueChanged += (object sender, OnGridValueChangedEventArgs eventArgs) => // La signanture reste tjr la même. 
+        OnUpdate += (object sender, OnUpdateArgs eventArgs) => // La signanture reste tjr la même. 
         {
             int x = eventArgs.x;
             int y = eventArgs.y;
@@ -38,10 +39,10 @@ public class Evenements
             int[,] gridArray = new int[1, 1];
             gridArray[x, y] = value;
 
-            if (OnGridValueChanged != null) // Teste si l'handler est bien init
+            if (OnUpdate != null) // Teste si l'handler est bien init
             {
-                OnGridValueChanged(this, // Appel de l'handler...
-                    new OnGridValueChangedEventArgs { x = x, y = y }  // et on instancie à la volée une classe anonyme qui contient nos paramètres.
+                OnUpdate(this, // Appel de l'handler...
+                    new OnUpdateArgs { x = x, y = y }  // et on instancie à la volée une classe anonyme qui contient nos paramètres.
                 ); 
             }
         }
