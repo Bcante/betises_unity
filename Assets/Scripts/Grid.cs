@@ -108,10 +108,10 @@ public class Grid {
     }
 
     public int GetValue(int x, int y) {
-        if (x >= 0 && y >= 0 && x < width && y < height) {
+        if (clickInRange(x, y)) {
             return gridArray[x, y];
         } else {
-            return 0;
+            return 0; // Manière pas stylée de gérer les erreurs.
         }
     }
 
@@ -121,15 +121,30 @@ public class Grid {
         return GetValue(x, y);
     }
 
+    public bool clickInRange(int x, int y)
+    {
+        if (x >= 0 && y >= 0 && x < width && y < height)
+        {
+            return true;
+        } 
+        else
+        {
+            return false;
+        }
+    }
+
     public void AddValue(Vector3 worldPosition, int value, int range) {
         GetXY(worldPosition, out int originX, out int originY);
-        for (int i = 0; i < range; i++)
-        {
-            for (int j = 0; j < range; j++)
-            {
-                AddValue(originX + i, originY + j, value);
-            }
+        if (clickInRange(originX, originY)) {
+            for (int i = 0; i < range; i++)
+                {
+                    for (int j = 0; j < range; j++)
+                    {
+                        AddValue(originX + i, originY + j, value);
+                    }
+                }
         }
+        
 
 
         //int lowerValueAmount = Mathf.RoundToInt((float)value / (totalRange - fullValueRange));
