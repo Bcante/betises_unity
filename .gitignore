@@ -60,3 +60,8 @@ crashlytics-build.properties
 
 # DLL
 *.dll
+# Meta
+*.meta
+#MISC
+ProjectSettings/*
+*/CodeMonkey/*

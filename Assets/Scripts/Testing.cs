@@ -19,7 +19,7 @@ public class Testing : MonoBehaviour {
         {
             Vector3 position = UtilsClass.GetMouseWorldPosition();
             int value = grid.GetValue(position);
-            grid.SetValue(position, value + 5); 
+            grid.AddValue(position, Grid.HEAT_MAP_INCREMENT , Grid.HEAT_MAP_CLICK_RANGE); 
         }
     }
 }

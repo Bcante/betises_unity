@@ -12,16 +12,19 @@ public class HeatMapVisual : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-
-
-        
     }
 
     public void SetGrid(Grid grid)
     {
         this.grid = grid;
         UpdateHeatMapVisual();
-        
+
+        grid.OnGridValueChanged += Grid_OnGridValueChanged; // Subscribe à l'evenement 
+    }
+
+    private void Grid_OnGridValueChanged(object sender, Grid.OnGridValueChangedEventArgs e)
+    {
+        UpdateHeatMapVisual();
     }
 
     private void UpdateHeatMapVisual()
@@ -34,15 +37,18 @@ public class HeatMapVisual : MonoBehaviour
             {
                 int index = i * grid.GetHeight() + j;
                 Vector3 quadSize = new Vector3(1, 1) * grid.GetCellSize();
-                MeshUtils.AddToMeshArrays(vertices, uv, triangles,index, grid.GetWorldPosition(i, j) + quadSize * .5f, 0f, quadSize, Vector2.zero, Vector2.zero);
+
+                int gridValue = grid.GetValue(i, j);
+                float normalizedValue = (float)gridValue / Grid.HEAT_MAP_MAX_VALUE; //ça permet d'avoir un %
+                Vector2 gridValueUV = new Vector2(normalizedValue, 0f);
+
+                MeshUtils.AddToMeshArrays(vertices, uv, triangles,index, grid.GetWorldPosition(i, j) + quadSize * .5f, 0f, quadSize, gridValueUV, gridValueUV);
             }
         }
         mesh.vertices = vertices;
         mesh.uv = uv;
         mesh.triangles = triangles;
 
-        // Adapter le gameobject par rapport a l'offset lié au cellsize
-        //GetComponent<Transform>().position += new Vector3(grid.GetCellSize()*.5f, grid.GetCellSize()*.5f, 0); 
 
     }
 

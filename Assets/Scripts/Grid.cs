@@ -19,9 +19,15 @@ using CodeMonkey.Utils;
 public class Grid {
 
     public const int HEAT_MAP_MAX_VALUE = 100;
-    public const int HEAT_MAP_MIN_VALUE = 0; // Felix is a baby 
+    public const int HEAT_MAP_MIN_VALUE = 0;
+    public const int HEAT_MAP_CLICK_RANGE = 3; //Range comme dans advance wars
+    public const int HEAT_MAP_INCREMENT = 5;
 
+    // Event Handler
     public event EventHandler<OnGridValueChangedEventArgs> OnGridValueChanged;
+
+
+    // Local class definition
     public class OnGridValueChangedEventArgs : EventArgs
     {
         public int x;
@@ -56,7 +62,7 @@ public class Grid {
             Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
             Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
 
-            OnGridValueChanged += (object sender, OnGridValueChangedEventArgs eventArgs) =>
+            OnGridValueChanged += (object sender, OnGridValueChangedEventArgs eventArgs) => 
             {
                 debugTextArray[eventArgs.x, eventArgs.y].text = gridArray[eventArgs.x, eventArgs.y].ToString();
             };
@@ -115,10 +121,16 @@ public class Grid {
         return GetValue(x, y);
     }
 
-    public void AddValue(Vector3 worldPosition, int value, int fullValueRange, int totalRange) {
-        int x, y;
-        GetXY(worldPosition, out x, out y);
-        SetValue(x, y, value);
+    public void AddValue(Vector3 worldPosition, int value, int range) {
+        GetXY(worldPosition, out int originX, out int originY);
+        for (int i = 0; i < range; i++)
+        {
+            for (int j = 0; j < range; j++)
+            {
+                AddValue(originX + i, originY + j, value);
+            }
+        }
+
 
         //int lowerValueAmount = Mathf.RoundToInt((float)value / (totalRange - fullValueRange));
 
