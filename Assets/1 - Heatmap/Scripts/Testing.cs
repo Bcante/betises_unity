@@ -9,6 +9,7 @@ namespace old
     {
 
         [SerializeField] private HeatMapVisual heatMapVisual;
+        [SerializeField] private HeatMapVisual heatMapBoolVisual;
         private Grid grid;
 
         private void Start()

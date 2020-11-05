@@ -99,3 +99,5 @@ MonoBleedingEdge/etc/mono/config
 MonoBleedingEdge/etc/mono/mconfig/config.xml
 Packages/manifest.json
 UnityCrashHandler32.exe
+*.unity
+Assets/Scenes/SampleScene.unity
