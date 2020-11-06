@@ -55,7 +55,7 @@ namespace Generic_2
                     int index = i * grid.GetHeight() + j;
                     Vector3 quadSize = new Vector3(1, 1) * grid.GetCellSize();
 
-                    bool gridValue = grid.GetValue(i, j);
+                    bool gridValue = grid.GetGridObject(i, j);
                     float normalizedValue = gridValue ? 1f : 0f;
                     Vector2 gridValueUV = new Vector2(normalizedValue, 0f);
 

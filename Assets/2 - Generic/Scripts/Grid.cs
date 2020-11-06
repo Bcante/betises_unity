@@ -43,7 +43,8 @@ namespace Generic_2
         private Vector3 originPosition;
         private TGridObject[,] gridArray;
 
-        public Grid(int width, int height, float cellSize, Vector3 originPosition, Func<TGridObject> createGridObject)
+        //Func<Grid<TGridObject>, int,int, TGridObject> : Une fonction en entrée qui a comme param une grid, un int (x), un int (y), et renvoie une grid
+        public Grid(int width, int height, float cellSize, Vector3 originPosition, Func<Grid<TGridObject>, int,int, TGridObject> createGridObject)
         {
             this.width = width;
             this.height = height;
@@ -56,7 +57,7 @@ namespace Generic_2
             {
                 for (int y = 0; y < gridArray.GetLength(1); y++)
                 {
-                    gridArray[x, y] = createGridObject();
+                    gridArray[x, y] = createGridObject(this, x, y); // Permet d'instancier chaque cellule sans connaître à l'avance le type
                 }
             }
 
@@ -110,7 +111,8 @@ namespace Generic_2
             y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
         }
 
-        public void SetValue(int x, int y, TGridObject value)
+        
+        public void SetValueObject(int x, int y, TGridObject value)
         {
             if (x >= 0 && y >= 0 && x < width && y < height)
             {
@@ -119,15 +121,22 @@ namespace Generic_2
             }
         }
 
-        public void SetValue(Vector3 worldPosition, TGridObject value)
+        // Anciennement SetValue : On l'appelait directement avant, maintenantt qu'on utilise des objets c'est plus le cas
+        // On a donc besoin d'une méthode externe pour déclencher ça
+        public void SetGridObject(Vector3 worldPosition, TGridObject value)
         {
             int x, y;
             GetXY(worldPosition, out x, out y);
-            SetValue(x, y, value);
+            SetValueObject(x, y, value);
+        }
+
+        public void TriggerGridObjectChanged(int x, int y)
+        {
+            if (OnGridValueChanged != null) OnGridValueChanged(this, new OnGridValueChangedEventArgs { x = x, y = y });
         }
 
 
-        public TGridObject GetValue(int x, int y)
+        public TGridObject GetGridObject(int x, int y)
         {
             if (clickInRange(x, y))
             {
@@ -139,11 +148,11 @@ namespace Generic_2
             }
         }
 
-        public TGridObject GetValue(Vector3 worldPosition)
+        public TGridObject GetGridObject(Vector3 worldPosition)
         {
             int x, y;
             GetXY(worldPosition, out x, out y);
-            return GetValue(x, y);
+            return GetGridObject(x, y);
         }
 
         public bool clickInRange(int x, int y)

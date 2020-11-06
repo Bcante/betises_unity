@@ -12,7 +12,8 @@ namespace Generic_2 {
 
         private void Start() {
             grid = new Grid<HeatMapGridObject>(10, 10, 10f, Vector3.zero, 
-                () => new HeatMapGridObject()); // pourquoi pas juste new HeatMapGridObject ?
+                (Grid<HeatMapGridObject> g, int x, int y) //A cette signature ...
+                => new HeatMapGridObject(g,x,y)); // ... On associe une méthode, qui est onstructeur de grid object
             //  heatMapVisual.SetGrid(grid);
             // heatMapBoolVisual.SetGrid(grid);
         }
@@ -22,8 +23,21 @@ namespace Generic_2 {
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 position = UtilsClass.GetMouseWorldPosition();
-               // grid.SetValue(position, true);
+                HeatMapGridObject heatMapGridObject = grid.GetGridObject(position);
+
+                if (heatMapGridObject != null)
+                {
+                    heatMapGridObject.addValue(5);
+                }
+
             }
         }
+        public HeatMapGridObject UneAutreFonction(Grid<HeatMapGridObject> g, int x, int y)
+        {
+            x = 1;
+            return new HeatMapGridObject(g, x, y);
+        }
     }
+    
+        
 }
