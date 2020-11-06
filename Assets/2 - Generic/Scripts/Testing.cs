@@ -8,12 +8,13 @@ namespace Generic_2 {
 
         [SerializeField] private HeatMapVisual heatMapVisual;
         [SerializeField] private HeatMapBoolVisual heatMapBoolVisual;
-        private Grid<bool> grid;
+        private Grid<HeatMapGridObject> grid;
 
         private void Start() {
-            grid = new Grid<bool>(10, 10, 10f, Vector3.zero);
+            grid = new Grid<HeatMapGridObject>(10, 10, 10f, Vector3.zero, 
+                () => new HeatMapGridObject()); // pourquoi pas juste new HeatMapGridObject ?
             //  heatMapVisual.SetGrid(grid);
-            heatMapBoolVisual.SetGrid(grid);
+            // heatMapBoolVisual.SetGrid(grid);
         }
 
         private void Update() {
@@ -21,7 +22,7 @@ namespace Generic_2 {
             if (Input.GetMouseButtonDown(0))
             {
                 Vector3 position = UtilsClass.GetMouseWorldPosition();
-                grid.SetValue(position, true);
+               // grid.SetValue(position, true);
             }
         }
     }
