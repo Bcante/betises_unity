@@ -22,9 +22,9 @@ namespace Generic_2
             this.y = y;
         }
 
-        public void addValue(int value)
+        public void addValue(int addValue)
         {
-            value = +value;
+            this.value = addValue + this.value;
             value = Mathf.Clamp(value, MIN, MAX);
             grid.TriggerGridObjectChanged(x,y); // Permet de déclencher l'évènement, qui sera envoyé aux visuals
         }

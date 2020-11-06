@@ -144,7 +144,7 @@ namespace Generic_2
             }
             else
             {
-                return default(TGridObject); // Manière pas stylée de gérer les erreurs.
+                return default(TGridObject);
             }
         }
 
