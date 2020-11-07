@@ -7,7 +7,7 @@ namespace Generic_2
 {
     public class HeatMapGridObject
     {
-        public int value;
+        public int value { get; set; }
         private const int MIN = 0;
         private const int MAX = 100;
 
