@@ -29,6 +29,8 @@ namespace Generic_2 {
             }
             heatMapGridObject = grid.GetGridObject(0, 2);
             heatMapGridObject.is_bomb = true;
+            heatMapGridObject = grid.GetGridObject(9, 9);
+            heatMapGridObject.is_bomb = true;
             BombInit();
 
         }
@@ -50,9 +52,9 @@ namespace Generic_2 {
 
         private void MajVoisins(int x, int y)
         {
-            for (int i = x - 1; i < x + 1; i++)
+            for (int i = x - 1; i < x + 2; i++)
             {
-                for (int j = y - 1; j < y + 1; j++)
+                for (int j = y - 1; j < y + 2; j++)
                 {
                     if (grid.clickInRange(i, j))
                         grid.GetGridObject(i, j).addValue(1);
