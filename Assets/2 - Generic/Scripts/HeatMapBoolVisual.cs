@@ -66,9 +66,6 @@ namespace Generic_2
             mesh.uv = uv;
             mesh.triangles = triangles;
 
-
         }
-
-
     }
 }

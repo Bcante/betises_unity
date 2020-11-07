@@ -148,9 +148,8 @@ namespace Generic_2
             }
         }
 
-        public TGridObject GetGridObject(Vector3 worldPosition)
+        public TGridObject GetGridObject(Vector3 worldPosition, ref int x, ref int y)
         {
-            int x, y;
             GetXY(worldPosition, out x, out y);
             return GetGridObject(x, y);
         }
@@ -166,7 +165,7 @@ namespace Generic_2
                 return false;
             }
         }
-
+               
 
         }
 

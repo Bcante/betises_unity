@@ -13,10 +13,17 @@ namespace Generic_2
         private Mesh mesh;
         private bool updateMesh;
 
+        private Dictionary<string,float> colorCode;
+
         public void Awake()
         {
             mesh = new Mesh();
             GetComponent<MeshFilter>().mesh = mesh;
+            colorCode = new Dictionary<string, float>();
+            colorCode.Add("HIDDEN", 0f);
+            colorCode.Add("BOMB", .1f);
+            colorCode.Add("SAFE", 1f);
+            
         }
 
         public void SetGrid(Grid<HeatMapGridObject> grid)
@@ -59,9 +66,11 @@ namespace Generic_2
                     Vector3 quadSize = new Vector3(1, 1) * grid.GetCellSize();
 
                     HeatMapGridObject gridValue = grid.GetGridObject(i, j);
-                    float normalizedValue = gridValue.getValueNormalized();
+                    string statut = gridValue.statut;
+
+
                     
-                    Vector2 gridValueUV = new Vector2(normalizedValue, 0f);
+                    Vector2 gridValueUV = new Vector2(colorCode[statut], 0f);
 
                     MeshUtils.AddToMeshArrays(vertices, uv, triangles, index, grid.GetWorldPosition(i, j) + quadSize * .5f, 0f, quadSize, gridValueUV, gridValueUV);
                 }
@@ -75,4 +84,5 @@ namespace Generic_2
 
 
     }
+
 }

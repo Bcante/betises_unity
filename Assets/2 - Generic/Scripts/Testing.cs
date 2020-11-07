@@ -19,26 +19,62 @@ namespace Generic_2 {
             //  heatMapVisual.SetGrid(grid);
             //heatMapBoolVisual.SetGrid(grid);
             heatMapGenericVisual.SetGrid(grid);
+
+            HeatMapGridObject heatMapGridObject;
+            for (int i = 0; i < 5; i++){
+                heatMapGridObject = grid.GetGridObject(i,i) ;
+                heatMapGridObject.is_bomb = true;
+            }
+            heatMapGridObject = grid.GetGridObject(0, 2);
+            heatMapGridObject.is_bomb = true;
+
+
         }
 
         private void Update() {
 
             if (Input.GetMouseButtonDown(0))
             {
+                int x = -1;
+                int y = -1;
                 Vector3 position = UtilsClass.GetMouseWorldPosition();
-                HeatMapGridObject heatMapGridObject = grid.GetGridObject(position);
-
+                HeatMapGridObject heatMapGridObject = grid.GetGridObject(position,ref x,ref y);
+                
                 if (heatMapGridObject != null)
                 {
-                    heatMapGridObject.addValue(5);
+                    heatMapGridObject.Revele();
+                    AlgoRecursif(x,y);
                 }
-
             }
         }
-        public HeatMapGridObject UneAutreFonction(Grid<HeatMapGridObject> g, int x, int y)
+
+        private void AlgoRecursif (int x, int y)
         {
-            x = 1;
-            return new HeatMapGridObject(g, x, y);
+            HeatMapGridObject heatMapGridObject = grid.GetGridObject(x, y);
+
+            if (grid.clickInRange(x, y) && !heatMapGridObject.is_bomb)
+            {
+                heatMapGridObject.Revele();
+                // Check left
+                heatMapGridObject = grid.GetGridObject(x - 1, y);
+                if (heatMapGridObject != null && heatMapGridObject.is_discovered == false)
+                    AlgoRecursif(x - 1, y);
+
+                //Check Right
+                heatMapGridObject = grid.GetGridObject(x + 1, y);
+                if (heatMapGridObject != null && heatMapGridObject.is_discovered == false)
+                    AlgoRecursif(x + 1, y);
+
+                //Check Top
+                heatMapGridObject = grid.GetGridObject(x, y - 1);
+                if (heatMapGridObject != null && heatMapGridObject.is_discovered == false)
+                    AlgoRecursif(x , y - 1);
+
+                //Check bot
+                heatMapGridObject = grid.GetGridObject(x, y + 1);
+                if (heatMapGridObject != null && heatMapGridObject.is_discovered == false)
+                    AlgoRecursif(x , y + 1);
+            }
         }
     }
     
