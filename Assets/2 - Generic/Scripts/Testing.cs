@@ -8,6 +8,8 @@ namespace Generic_2 {
 
         [SerializeField] private HeatMapVisual heatMapVisual;
         [SerializeField] private HeatMapBoolVisual heatMapBoolVisual;
+        [SerializeField] private HeatMapGenericVisual heatMapGenericVisual;
+
         private Grid<HeatMapGridObject> grid;
 
         private void Start() {
@@ -15,7 +17,8 @@ namespace Generic_2 {
                 (Grid<HeatMapGridObject> g, int x, int y) //A cette signature ...
                 => new HeatMapGridObject(g,x,y)); // ... On associe une méthode, qui est onstructeur de grid object
             //  heatMapVisual.SetGrid(grid);
-            // heatMapBoolVisual.SetGrid(grid);
+            //heatMapBoolVisual.SetGrid(grid);
+            heatMapGenericVisual.SetGrid(grid);
         }
 
         private void Update() {
