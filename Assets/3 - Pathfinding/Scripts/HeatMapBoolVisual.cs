@@ -5,11 +5,11 @@ using System.Diagnostics;
 using UnityEngine;
 using Generic_2;
 
-namespace Generic_2
+namespace AStar_3
 {
-    public class HeatMapGenericVisual : MonoBehaviour
+    public class HeatMapBoolVisual : MonoBehaviour
     {
-        private Grid<HeatMapGridObject> grid;
+        private Grid<bool> grid;
         private Mesh mesh;
         private bool updateMesh;
 
@@ -19,7 +19,7 @@ namespace Generic_2
             GetComponent<MeshFilter>().mesh = mesh;
         }
 
-        public void SetGrid(Grid<HeatMapGridObject> grid)
+        public void SetGrid(Grid<bool> grid)
         {
             this.grid = grid;
             UpdateHeatMapVisual();
@@ -28,7 +28,7 @@ namespace Generic_2
         }
 
         // Pour des raisons de performance on va mettre en buffer les update avant de les déclencher
-        private void Grid_OnGridValueChanged(object sender, Grid<HeatMapGridObject>.OnGridValueChangedEventArgs e)
+        private void Grid_OnGridValueChanged(object sender, Grid<bool>.OnGridValueChangedEventArgs e)
         {
             UpdateHeatMapVisual();
             updateMesh = true;
@@ -44,9 +44,6 @@ namespace Generic_2
             }
         }
 
-        /*
-         * 
-         * */
         private void UpdateHeatMapVisual()
         {
             MeshUtils.CreateEmptyMeshArrays(grid.GetWidth() * grid.GetHeight(), out Vector3[] vertices, out Vector2[] uv, out int[] triangles); // A run à chaque fois ?
@@ -58,9 +55,8 @@ namespace Generic_2
                     int index = i * grid.GetHeight() + j;
                     Vector3 quadSize = new Vector3(1, 1) * grid.GetCellSize();
 
-                    HeatMapGridObject gridValue = grid.GetGridObject(i, j);
-                    float normalizedValue = gridValue.getValueNormalized();
-                    
+                    bool gridValue = grid.GetGridObject(i, j);
+                    float normalizedValue = gridValue ? 1f : 0f;
                     Vector2 gridValueUV = new Vector2(normalizedValue, 0f);
 
                     MeshUtils.AddToMeshArrays(vertices, uv, triangles, index, grid.GetWorldPosition(i, j) + quadSize * .5f, 0f, quadSize, gridValueUV, gridValueUV);
@@ -72,6 +68,7 @@ namespace Generic_2
 
 
         }
+
 
     }
 }

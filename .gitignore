@@ -65,7 +65,6 @@ crashlytics-build.properties
 #MISC
 ProjectSettings/*
 */CodeMonkey/*
-Assets/Scenes/SampleScene.unity
 Assets/Textures/Black_Red_Yellow_Green.png
 Assets/Textures/New Material.mat
 HeatMap.exe

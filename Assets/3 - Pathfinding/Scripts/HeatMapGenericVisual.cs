@@ -5,7 +5,7 @@ using System.Diagnostics;
 using UnityEngine;
 using Generic_2;
 
-namespace Generic_2
+namespace AStar_3
 {
     public class HeatMapGenericVisual : MonoBehaviour
     {
