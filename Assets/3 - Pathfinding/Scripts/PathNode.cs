@@ -6,12 +6,12 @@ namespace AStar_3 {
     public class PathNode
     {
         private Grid<PathNode> grid;
-        private int x;
-        private int y;
+        public int x;
+        public int y;
 
         public int fCost;
-        public int gCost;
-        public int hCost;
+        public int gCost; //cost of the path from the start node to n,
+        public int hCost; //estimation du meilleur chemin de N vers la fin
 
         public PathNode cameFromNode;
 
@@ -25,6 +25,12 @@ namespace AStar_3 {
         public override string ToString()
         {
             return x + " - " + y;          
+        }
+
+        public int CalculateFCost()
+        {
+            fCost = gCost + hCost;
+            return fCost;
         }
     }
 
