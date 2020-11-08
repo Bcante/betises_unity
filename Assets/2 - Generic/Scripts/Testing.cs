@@ -18,7 +18,7 @@ namespace Generic_2 {
                 => new HeatMapGridObject(g,x,y)); // ... On associe une méthode, qui est onstructeur de grid object
             //  heatMapVisual.SetGrid(grid);
             //heatMapBoolVisual.SetGrid(grid);
-            heatMapGenericVisual.SetGrid(grid);
+            //  heatMapGenericVisual.SetGrid(grid);
         }
 
         private void Update() {
