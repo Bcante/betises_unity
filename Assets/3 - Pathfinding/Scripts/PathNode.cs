@@ -9,9 +9,10 @@ namespace AStar_3 {
         public int x;
         public int y;
 
-        public int fCost;
+        
         public int gCost; //cost of the path from the start node to n,
         public int hCost; //estimation du meilleur chemin de N vers la fin
+        public int fCost; // somme des dux
 
         public PathNode cameFromNode;
 
