@@ -11,7 +11,7 @@ namespace AStar_3 {
         private const int MOVE_STRAIGHT_COST = 10;
         private const int MOVE_DIAGONAL_COST = 14;
 
-        private Grid<PathNode> grid;
+        public Grid<PathNode> grid;
         private List<PathNode> openList; // La liste des noeuds qu'on va chercher (à trier par heuristique mb)
         private List<PathNode> closedList; // La liste des noeuds déjà cherché
 
