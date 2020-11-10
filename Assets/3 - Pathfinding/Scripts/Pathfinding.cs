@@ -64,7 +64,7 @@ namespace AStar_3 {
                     return CalculatePath(endNode); // Le chemin début fin est retourné ici
                 }
                 openList.Remove(currentNode);
-                openList.Add(currentNode);
+                closedList.Add(currentNode);
 
                 
                 foreach(PathNode neighborNode in GetNeighbourList(currentNode))
@@ -97,10 +97,15 @@ namespace AStar_3 {
                 for (int j = -1; j < currentNode.y + 2 ; j++)
                 {
                     bool inRange = grid.ClickInRange(i, j);
-                    bool walkableNode = IsWalkableNode(currentNode);
-                    if (inRange && !(i == currentNode.x && j == currentNode.y) && walkableNode) // Clic pas hors tableau et on veut pas s'ajouter nous même en voisins
+                    PathNode tmpNode = grid.GetGridObject(i, j);
+                    
+                    if (inRange && !(i == currentNode.x && j == currentNode.y)) // Clic pas hors tableau et on veut pas s'ajouter nous même en voisins
                     {
-                        neighborList.Add(grid.GetGridObject(i, j));
+                        bool walkableNode = IsWalkableNode(tmpNode);
+                        if (walkableNode) 
+                        {
+                            neighborList.Add(tmpNode);
+                        }
                     }
                 }
             }
