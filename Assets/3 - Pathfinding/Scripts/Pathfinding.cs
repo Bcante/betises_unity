@@ -11,7 +11,7 @@ namespace AStar_3 {
         private const int MOVE_STRAIGHT_COST = 10;
         private const int MOVE_DIAGONAL_COST = 14;
 
-        public Grid<PathNode> grid;
+        private Grid<PathNode> grid;
         private List<PathNode> openList; // La liste des noeuds qu'on va chercher (à trier par heuristique mb)
         private List<PathNode> closedList; // La liste des noeuds déjà cherché
 
@@ -23,8 +23,15 @@ namespace AStar_3 {
                 );
         }
 
-        private List<PathNode> FindPath(int startX, int startY, int endX, int endY)
+        public Grid<PathNode> GetGrid()
         {
+            return this.grid;
+        }
+
+        public List<PathNode> FindPath(int startX, int startY, int endX, int endY)
+        {
+
+            /* INITIALISIATION */
             PathNode startNode = grid.GetGridObject(startX, startY);
             PathNode endNode = grid.GetGridObject(endX, endY);
 
@@ -36,10 +43,9 @@ namespace AStar_3 {
                 for (int j = 0; j < grid.GetHeight(); j++)
                 {
                     PathNode pathNode = grid.GetGridObject(i, j);
-                    pathNode.gCost = int.MaxValue; // infini
+                    pathNode.gCost = 10000  ; // infini
                     int fCost = pathNode.CalculateFCost();
                     pathNode.cameFromNode = null;
-
                 }
             }
 
@@ -47,6 +53,8 @@ namespace AStar_3 {
             startNode.hCost =  CalculateDistanceCost(startNode, endNode);
             startNode.CalculateFCost();
             bool endNotFound = true;
+
+            /* MAIN LOOP */
             while (openList.Count>0 && endNotFound)
             {
                 PathNode currentNode = GetLowestFCostNode(openList);
@@ -119,7 +127,7 @@ namespace AStar_3 {
         {
             int xDistance = Mathf.Abs(a.x - b.x);
             int yDistance = Mathf.Abs(a.y - b.y);
-            int remaining = xDistance + yDistance;
+            int remaining = Math.Abs(xDistance - yDistance);
             return MOVE_DIAGONAL_COST * Mathf.Min(xDistance, yDistance) + MOVE_STRAIGHT_COST * remaining;
         }
 
@@ -127,7 +135,7 @@ namespace AStar_3 {
         private PathNode GetLowestFCostNode(List<PathNode> pathNodeList) // absolument dégueulasse en terme d'opti non?
         {
             PathNode pn = pathNodeList[0];
-            for (int i = 0; i < pathNodeList.Count; i++)
+            for (int i = 1; i < pathNodeList.Count; i++)
             {
                 if (pathNodeList[i].fCost < pn.fCost)
                 {
