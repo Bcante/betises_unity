@@ -11,6 +11,7 @@ namespace AStar_3
         private void Start()
         {
             pathfinding = new Pathfinding(3, 3);
+            pathfinding.GetGrid().GetGridObject(1, 1).type = tileType.Mur;
         }
 
         private void Update()
@@ -19,6 +20,7 @@ namespace AStar_3
             {
                 Vector3 mouseWorldPosition = UtilsClass.GetMouseWorldPosition();
                     pathfinding.GetGrid().GetXY(mouseWorldPosition, out int x, out int y);
+
 
                 if (pathfinding.GetGrid().ClickInRange(x,y))
                 {

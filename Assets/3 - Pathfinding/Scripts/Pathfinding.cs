@@ -96,16 +96,25 @@ namespace AStar_3 {
             {
                 for (int j = -1; j < currentNode.y + 2 ; j++)
                 {
-                    bool InRange = grid.ClickInRange(i, j);
-                    if (InRange && !(i == currentNode.x && j == currentNode.y)) // Clic pas hors tableau et on veut pas s'ajouter nous même en voisins
+                    bool inRange = grid.ClickInRange(i, j);
+                    bool walkableNode = IsWalkableNode(currentNode);
+                    if (inRange && !(i == currentNode.x && j == currentNode.y) && walkableNode) // Clic pas hors tableau et on veut pas s'ajouter nous même en voisins
                     {
                         neighborList.Add(grid.GetGridObject(i, j));
                     }
                 }
             }
             return neighborList;
+        }
 
-
+        private bool IsWalkableNode(PathNode currentNode)
+        {
+            tileType res = currentNode.type;
+            if (res == tileType.Mur)
+            {
+                return false;
+            }
+            return true;
         }
 
         private List<PathNode> CalculatePath(PathNode endNode)

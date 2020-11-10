@@ -110,24 +110,6 @@ namespace AStar_3{
             y = Mathf.FloorToInt((worldPosition - originPosition).y / cellSize);
         }
 
-        
-        //public void SetValueObject(int x, int y, TGridObject value)
-        //{
-        //    if (x >= 0 && y >= 0 && x < width && y < height)
-        //    {
-        //        gridArray[x, y] = value;
-        //        if (OnGridValueChanged != null) OnGridValueChanged(this, new OnGridValueChangedEventArgs { x = x, y = y });
-        //    }
-        //}
-
-        //// Anciennement SetValue : On l'appelait directement avant, maintenantt qu'on utilise des objets c'est plus le cas
-        //// On a donc besoin d'une méthode externe pour déclencher ça
-        //public void SetGridObject(Vector3 worldPosition, TGridObject value)
-        //{
-        //    int x, y;
-        //    GetXY(worldPosition, out x, out y);
-        //    SetValueObject(x, y, value);
-        //}
 
         public void TriggerGridObjectChanged(int x, int y)
         {
