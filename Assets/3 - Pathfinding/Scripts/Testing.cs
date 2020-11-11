@@ -13,10 +13,13 @@ namespace AStar_3
         private void Start()
         {
 
-            pathfinding = new Pathfinding(4, 3);
+            pathfinding = new Pathfinding(10, 10);
             Grid<PathNode> g = pathfinding.GetGrid();
-            for (int x = 0; x < g.GetWidth()-1; x ++) { 
+            int width = g.GetWidth();
+            for (int x = 0; x < width - 1; x ++) { 
                 g.GetGridObject(x, 1).nodeType = NodeType.Wall;
+                g.GetGridObject(width - 1 - x, 3).nodeType = NodeType.Wall;
+                g.GetGridObject(x, 5).nodeType = NodeType.Wall;
             }
             heatMapGenericVisual.SetGrid(g);
         }
