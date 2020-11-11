@@ -67,8 +67,8 @@ namespace AStar_3 {
                 openList.Remove(currentNode);
                 closedList.Add(currentNode);
 
-                
-                foreach(PathNode neighborNode in GetNeighbourList(currentNode))
+                List<PathNode> nodes = GetNeighbourList(currentNode);
+                foreach (PathNode neighborNode in nodes)
                 {
                     int tentativeGCost = currentNode.gCost + CalculateDistanceCost(currentNode, neighborNode);
                     if (tentativeGCost < neighborNode.gCost)
@@ -93,9 +93,9 @@ namespace AStar_3 {
         private List<PathNode> GetNeighbourList(PathNode currentNode)
         {
             List<PathNode> neighborList = new List<PathNode>();
-            for (int i = -1; i < currentNode.x + 2; i++)
+            for (int i = currentNode.x - 1; i < currentNode.x + 2; i++)
             {
-                for (int j = -1; j < currentNode.y + 2 ; j++)
+                for (int j = currentNode.y - 1; j < currentNode.y + 2 ; j++)
                 {
                     bool inRange = grid.ClickInRange(i, j);
                     PathNode tmpNode = grid.GetGridObject(i, j);
@@ -138,6 +138,10 @@ namespace AStar_3 {
                 parent = parent.cameFromNode;
             }
             chemin.Reverse();
+            foreach (PathNode pn in chemin)
+            {
+                Debug.Log(pn);
+            }
             return chemin;
         }
 
