@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
+
 namespace AStar_3
 {
     public class Testing : MonoBehaviour
@@ -13,15 +14,18 @@ namespace AStar_3
         private void Start()
         {
 
-            pathfinding = new Pathfinding(10, 10);
+            pathfinding = new Pathfinding(6, 4);
             Grid<PathNode> g = pathfinding.GetGrid();
             int width = g.GetWidth();
-            for (int x = 0; x < width - 1; x ++) { 
+            for (int x = 0; x < width - 1; x++) {
                 g.GetGridObject(x, 1).nodeType = NodeType.Wall;
-                g.GetGridObject(width - 1 - x, 3).nodeType = NodeType.Wall;
-                g.GetGridObject(x, 5).nodeType = NodeType.Wall;
+                //g.GetGridObject(width - 1 - x, 3).nodeType = NodeType.Wall;
+                //g.GetGridObject(x, 5).nodeType = NodeType.Wall;
             }
             heatMapGenericVisual.SetGrid(g);
+
+            
+
         }
 
         private void Update()

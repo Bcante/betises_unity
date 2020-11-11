@@ -50,6 +50,16 @@ namespace AStar_3 {
             this.nodeType = nodeType;
             grid.TriggerGridObjectChanged(x,y);
         }
+
+        class PathNodeComparator : IComparer<PathNode>
+        {
+            public int Compare(PathNode x, PathNode y)
+            {
+                // CompareTo() method 
+                return x.fCost.CompareTo(y.fCost);
+
+            }
+        }
     }
 
 

@@ -12,7 +12,9 @@ namespace AStar_3 {
         private const int MOVE_DIAGONAL_COST = 14;
 
         private Grid<PathNode> grid;
-        private List<PathNode> openList; // La liste des noeuds qu'on va chercher (à trier par heuristique mb)
+        //private List<PathNode> ; // La liste des noeuds qu'on va chercher (à trier par heuristique mb)
+        private SortedList<PathNode, int> openList = new SortedList<PathNode, int>(new NodeComparator());
+
         private List<PathNode> closedList; // La liste des noeuds déjà cherché
 
 
@@ -36,7 +38,10 @@ namespace AStar_3 {
             PathNode startNode = grid.GetGridObject(startX, startY);
             PathNode endNode = grid.GetGridObject(endX, endY);
 
-            openList = new List<PathNode> { startNode }; // Notation pour rajouter un noeud, stylé
+            openList = new SortedList<PathNode, int>(new NodeComparator());
+
+            openList[startNode] = 1; // Notation pour rajouter un noeud, stylé
+
             closedList = new List<PathNode>();
 
             for (int i = 0; i < grid.GetWidth(); i++)
@@ -58,7 +63,8 @@ namespace AStar_3 {
             /* MAIN LOOP */
             while (openList.Count>0 && endNotFound)
             {
-                PathNode currentNode = GetLowestFCostNode(openList);
+                //PathNode currentNode = GetLowestFCostNode(openList);
+                PathNode currentNode = openList.First().Key;
                 if (currentNode == endNode) // énorme pas besoin de .equals()
                 {
                     endNotFound = false; // inutile 
@@ -78,9 +84,9 @@ namespace AStar_3 {
                         neighborNode.hCost = CalculateDistanceCost(neighborNode,endNode);
                         neighborNode.CalculateFCost();
 
-                        if (!openList.Contains(neighborNode))
+                        if (!openList.Keys.Contains(neighborNode))
                         {
-                            openList.Add(neighborNode);
+                            openList[neighborNode] = 1;
                         }
                     }
                 }
@@ -154,18 +160,18 @@ namespace AStar_3 {
         }
 
 
-        private PathNode GetLowestFCostNode(List<PathNode> pathNodeList) // absolument dégueulasse en terme d'opti non?
-        {
-            PathNode pn = pathNodeList[0];
-            for (int i = 1; i < pathNodeList.Count; i++)
-            {
-                if (pathNodeList[i].fCost < pn.fCost)
-                {
-                    pn = pathNodeList[i];
-                }
-            }
-            return pn;
-        }
+        //private PathNode GetLowestFCostNode(List<PathNode> pathNodeList) // absolument dégueulasse en terme d'opti non?
+        //{
+        //    PathNode pn = pathNodeList[0];
+        //    for (int i = 1; i < pathNodeList.Count; i++)
+        //    {
+        //        if (pathNodeList[i].fCost < pn.fCost)
+        //        {
+        //            pn = pathNodeList[i];
+        //        }
+        //    }
+        //    return pn;
+        //}
     }
 
     
