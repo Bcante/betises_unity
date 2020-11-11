@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace AStar_3 {
 
-    public enum tileType
+    public enum NodeType
     {
-        Plaine,
-        Mur
+        Grass,
+        Wall,
+        Valid,
+        Fog
     }
     public class PathNode
     {
@@ -19,9 +22,7 @@ namespace AStar_3 {
         public int hCost; //estimation du meilleur chemin de N vers la fin
         public int fCost; // somme des dux
 
-        public tileType type;
-
-        public enum ArrivalStatus { Unknown = -3, Late = -1, OnTime = 0, Early = 1 };
+        public NodeType nodeType;
 
         public PathNode cameFromNode;
 
@@ -30,7 +31,7 @@ namespace AStar_3 {
             this.grid = grid;
             this.x = x;
             this.y = y;
-            this.type = tileType.Plaine;
+            this.nodeType = NodeType.Grass;
         }
 
         public override string ToString()
@@ -42,6 +43,12 @@ namespace AStar_3 {
         {
             fCost = gCost + hCost;
             return fCost;
+        }
+
+        internal void setType(NodeType nodeType)
+        {
+            this.nodeType = nodeType;
+            grid.TriggerGridObjectChanged(x,y);
         }
     }
 

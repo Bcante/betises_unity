@@ -15,6 +15,7 @@ namespace AStar_3 {
         private List<PathNode> openList; // La liste des noeuds qu'on va chercher (à trier par heuristique mb)
         private List<PathNode> closedList; // La liste des noeuds déjà cherché
 
+
         public Pathfinding(int width, int height)
         {
             grid = new Grid<PathNode>(width, height, 10f, Vector3.zero, (
@@ -114,8 +115,8 @@ namespace AStar_3 {
 
         private bool IsWalkableNode(PathNode currentNode)
         {
-            tileType res = currentNode.type;
-            if (res == tileType.Mur)
+            NodeType res = currentNode.nodeType;
+            if (res == NodeType.Wall)
             {
                 return false;
             }
@@ -124,13 +125,16 @@ namespace AStar_3 {
 
         private List<PathNode> CalculatePath(PathNode endNode)
         {
+            endNode.setType(NodeType.Valid);
             List<PathNode> chemin = new List<PathNode>();
             chemin.Add(endNode);
             PathNode parent = endNode.cameFromNode;
 
+            
             while (parent != null)
             {
                 chemin.Add(parent);
+                parent.setType(NodeType.Valid);
                 parent = parent.cameFromNode;
             }
             chemin.Reverse();

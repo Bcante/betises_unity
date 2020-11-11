@@ -8,10 +8,15 @@ namespace AStar_3
     public class Testing : MonoBehaviour
     {
         private Pathfinding pathfinding;
+        [SerializeField]
+        private HeatMapGenericVisual heatMapGenericVisual;
         private void Start()
         {
-            pathfinding = new Pathfinding(3, 3);
-            pathfinding.GetGrid().GetGridObject(1, 1).type = tileType.Mur;
+            pathfinding = new Pathfinding(8, 8);
+            Grid<PathNode> g = pathfinding.GetGrid();
+            g.GetGridObject(1, 1).nodeType = NodeType.Wall;
+
+            heatMapGenericVisual.SetGrid(g);
         }
 
         private void Update()
