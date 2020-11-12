@@ -24,8 +24,6 @@ namespace AStar_3
             }
             heatMapGenericVisual.SetGrid(g);
 
-            
-
         }
 
         private void Update()

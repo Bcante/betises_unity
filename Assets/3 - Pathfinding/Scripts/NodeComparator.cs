@@ -9,7 +9,11 @@ namespace AStar_3
 
         public int Compare(PathNode x, PathNode y)
         {
-            return x.fCost.CompareTo(y.fCost);
+            if (x.x == y.x && y.x == y.y)
+            {
+                return 0;
+            }
+            return x.fCost.CompareTo(y.fCost) == 0 ? 1 : x.fCost.CompareTo(y.fCost);
         }
 
     }

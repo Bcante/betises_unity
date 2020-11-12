@@ -13,7 +13,7 @@ namespace AStar_3 {
 
         private Grid<PathNode> grid;
         //private List<PathNode> ; // La liste des noeuds qu'on va chercher (à trier par heuristique mb)
-        private SortedList<PathNode, int> openList = new SortedList<PathNode, int>(new NodeComparator());
+        private SortedList<PathNode, PathNode> openList = new SortedList<PathNode, PathNode>(new NodeComparator());
 
         private List<PathNode> closedList; // La liste des noeuds déjà cherché
 
@@ -38,9 +38,9 @@ namespace AStar_3 {
             PathNode startNode = grid.GetGridObject(startX, startY);
             PathNode endNode = grid.GetGridObject(endX, endY);
 
-            openList = new SortedList<PathNode, int>(new NodeComparator());
+            openList = new SortedList<PathNode, PathNode>(new NodeComparator());
 
-            openList[startNode] = 1; // Notation pour rajouter un noeud, stylé
+            openList[startNode] = startNode; // Notation pour rajouter un noeud, stylé
 
             closedList = new List<PathNode>();
 
@@ -84,9 +84,9 @@ namespace AStar_3 {
                         neighborNode.hCost = CalculateDistanceCost(neighborNode,endNode);
                         neighborNode.CalculateFCost();
 
-                        if (!openList.Keys.Contains(neighborNode))
+                        if (!openList.Values.Contains(neighborNode))
                         {
-                            openList[neighborNode] = 1;
+                            openList[neighborNode] = neighborNode;
                         }
                     }
                 }
