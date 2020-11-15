@@ -279,6 +279,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bfe8652e354d74385343021dedd735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tileMapSpriteUVArray:
+  - tilemapSprite: 1
+    uv00Pixels: {x: 64, y: 0}
+    uv11Pixels: {x: 128, y: 64}
+  - tilemapSprite: 2
+    uv00Pixels: {x: 192, y: 0}
+    uv11Pixels: {x: 256, y: 64}
 --- !u!4 &716581755
 Transform:
   m_ObjectHideFlags: 0
@@ -287,7 +294,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716581753}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 73.29892, y: 24.166496, z: -11.109375}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -311,7 +318,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3ce59b35b7dcd44f83c50583d720245, type: 2}
+  - {fileID: 2100000, guid: ee9eb9cf104c2fe4da729e21477b4a84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

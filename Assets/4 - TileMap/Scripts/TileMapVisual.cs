@@ -9,15 +9,50 @@ namespace Tilemap_4
 {
     public class TileMapVisual : MonoBehaviour
     {
+
+        [System.Serializable]
+        public struct TileMapSpriteUV
+        {
+            public TilemapObject.TilemapSprite tilemapSprite;
+            public Vector2Int uv00Pixels;
+            public Vector2Int uv11Pixels;
+
+        }
+
+        private struct UVCoords
+        {
+            public Vector2 uv00;
+            public Vector2 uv11;
+        }
+
+        [SerializeField]
+        private TileMapSpriteUV[] tileMapSpriteUVArray;
+
         private Grid<TilemapObject> grid;
         private Mesh mesh;
         private bool updateMesh;
+
+        private Dictionary<TilemapObject.TilemapSprite, UVCoords> uvCoordsDictionary;
 
 
         public void Awake()
         {
             mesh = new Mesh();
             GetComponent<MeshFilter>().mesh = mesh;
+
+            Texture texture = GetComponent<MeshRenderer>().material.mainTexture;
+            float textureWidth = texture.width;
+            float textureHeight = texture.height;
+
+            uvCoordsDictionary = new Dictionary<TilemapObject.TilemapSprite, UVCoords>();
+            foreach (TileMapSpriteUV tileMapSpriteUV in tileMapSpriteUVArray)
+            {
+                uvCoordsDictionary[tileMapSpriteUV.tilemapSprite] = new UVCoords
+                {
+                    uv00 = new Vector2((tileMapSpriteUV.uv00Pixels.x / textureWidth), (tileMapSpriteUV.uv00Pixels.y / textureHeight)),
+                    uv11 = new Vector2((tileMapSpriteUV.uv11Pixels.x / textureWidth), (tileMapSpriteUV.uv11Pixels.y / textureHeight)),
+                };
+            }
         }
 
         public void SetGrid(Grid<TilemapObject> grid)
@@ -70,7 +105,9 @@ namespace Tilemap_4
                     }
                     else
                     {
-                        gridValueUV11 = Vector2.one;
+                        UVCoords uVCoords = uvCoordsDictionary[tilemapSprite];
+                        gridValueUV00 = uVCoords.uv00;
+                        gridValueUV11 = uVCoords.uv11;
                     }
                     MeshUtils.AddToMeshArrays(vertices, uv, triangles, index, grid.GetWorldPosition(i, j) + quadSize * .5f, 0f, quadSize, gridValueUV00, gridValueUV11);
                 }
