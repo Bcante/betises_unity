@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +8,17 @@ namespace Tilemap_4
     public class Tilemap : MonoBehaviour
     {
         private Grid<TilemapObject> grid;
+        private TileMapVisual tileMapVisual;
 
         public Tilemap(int width, int height, float cellSize, Vector3 originPosition)
         {
             grid = new Grid<TilemapObject>(width, height, cellSize, originPosition,
                 (Grid<TilemapObject> g, int x, int y) => new TilemapObject(g,x,y));
+        }
+
+        internal void SetTilemapVisual(TileMapVisual tileMapVisual) // pourquoi l'appeler comme ça alors ????
+        {
+            tileMapVisual.SetGrid(grid);
         }
 
         public Grid<TilemapObject> GetGrid()
