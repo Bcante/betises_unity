@@ -14,10 +14,13 @@ namespace AStar_3 {
         private Grid<PathNode> grid;
         private List<PathNode> openList; // La liste des noeuds qu'on va chercher (à trier par heuristique mb)
         private List<PathNode> closedList; // La liste des noeuds déjà cherché
+        
+        public static Pathfinding Instance { get; private set; }
 
 
         public Pathfinding(int width, int height)
         {
+            Instance = this; 
             grid = new Grid<PathNode>(width, height, 10f, Vector3.zero, (
                 Grid<PathNode> g, int x, int y) // signature du constructeur
                 => new PathNode(g, x, y) // Constructeur
