@@ -61,13 +61,18 @@ namespace Tilemap_4
                     TilemapObject tilemapObject = grid.GetGridObject(i, j);
                     TilemapObject.TilemapSprite tilemapSprite = tilemapObject.GetTilemapSprite();
 
-                    Vector2 gridValueUV;
-                    if (tilemapSprite == TilemapObject.TilemapSprite.Ground)
-                        gridValueUV = Vector2.zero;
+                    Vector2 gridValueUV00 = Vector2.zero;
+                    Vector2 gridValueUV11;
+                    if (tilemapSprite == TilemapObject.TilemapSprite.None)
+                    {
+                        gridValueUV11 = Vector2.zero;
+                        quadSize = Vector3.zero;
+                    }
                     else
-                        gridValueUV = Vector2.one;
-                    
-                    MeshUtils.AddToMeshArrays(vertices, uv, triangles, index, grid.GetWorldPosition(i, j) + quadSize * .5f, 0f, quadSize, gridValueUV, gridValueUV);
+                    {
+                        gridValueUV11 = Vector2.one;
+                    }
+                    MeshUtils.AddToMeshArrays(vertices, uv, triangles, index, grid.GetWorldPosition(i, j) + quadSize * .5f, 0f, quadSize, gridValueUV00, gridValueUV11);
                 }
             }
             mesh.vertices = vertices;

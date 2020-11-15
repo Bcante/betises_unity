@@ -40,7 +40,8 @@ namespace Tilemap_4
         public enum TilemapSprite
         {
             None,
-            Ground
+            Ground,
+            Path,
         }
 
         private Grid<TilemapObject> grid;
